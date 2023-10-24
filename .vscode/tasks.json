@@ -1,0 +1,32 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: cl.exe 生成活动文件",
+			"command": "cl.exe",
+			"args": [
+				"/Zi",
+ 				"/EHsc",
+				"/nologo",
+				"/I${workspaceFolder}\\include",
+				"/IE:\\Windows Kits\\10\\Include\\10.0.22621.0\\um",
+				"/IE:\\Windows Kits\\10\\Include\\10.0.22621.0\\shared",
+				"/IE:\\Windows Kits\\10\\Include\\10.0.22621.0\\cppwinrt\\winrt",
+				"/IE:\\Windows Kits\\10\\Include\\10.0.22621.0\\km",
+				"/IE:\\Windows Kits\\10\\Include\\10.0.22621.0\\ucrt",
+				"/LDd",//${workspaceFolder}\\${fileBasenameNoExtension}.dll /Ld后面加需要编译的C++代码，Fe是重命名然后定义输出位置。
+				"${fileDirname}/*.cpp",
+				"/Fe${workspaceFolder}\\output\\${fileBasenameNoExtension}.dll"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build",
+			"detail": "编译器: cl.exe"
+		}
+	]
+}
