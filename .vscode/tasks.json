@@ -15,9 +15,10 @@
 				"/IE:\\Windows Kits\\10\\Include\\10.0.22621.0\\cppwinrt\\winrt",
 				"/IE:\\Windows Kits\\10\\Include\\10.0.22621.0\\km",
 				"/IE:\\Windows Kits\\10\\Include\\10.0.22621.0\\ucrt",
-				"/LDd",//${workspaceFolder}\\${fileBasenameNoExtension}.dll /Ld后面加需要编译的C++代码，Fe是重命名然后定义输出位置。
-				"${fileDirname}/*.cpp",
-				"/Fe${workspaceFolder}\\output\\${fileBasenameNoExtension}.dll"
+				"/c", //If we wanna create a static library, use /c to compile without link.exe.Then we can use lib.exe to create static lib from .obj.
+				//"/LDd",//${workspaceFolder}\\${fileBasenameNoExtension}.dll /Ld is used to publish a release dll . /LDd is the debug one.
+				"${fileDirname}\\*.cpp",
+				//"/Fe${workspaceFolder}\\output\\${fileBasenameNoExtension}.dll",
 			],
 			"options": {
 				"cwd": "${fileDirname}"
@@ -26,7 +27,24 @@
 				"$msCompile"
 			],
 			"group": "build",
-			"detail": "编译器: cl.exe"
-		}
+			"detail": "编译�?: cl.exe"
+		},
+
+		{
+			"type": "cppbuild",
+			"label": "C/C++: lib.exe 生成活动文件",
+			"command": "lib.exe",
+			"args": [
+				"${fileDirname}\\*.obj",	//Pointing at every single .obj files to create static library.
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build",
+			"detail": "lib.exe"
+		},
 	]
 }
